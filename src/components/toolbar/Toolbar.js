@@ -2,6 +2,12 @@ import {SheetComponent} from '@core/SheetComponent';
 
 export class Toolbar extends SheetComponent {
   static className = 'sheet__toolbar';
+  constructor($root) {
+    super($root, {
+      name: 'Toolbar',
+      listeners: ['click']
+    });
+  }
 
   toHTML() {
     return `
@@ -29,5 +35,9 @@ export class Toolbar extends SheetComponent {
                 <i class="material-icons">format_underlined</i>
             </div>
     `;
+  }
+
+  onClick(event) {
+    console.log(event.target);
   }
 }
