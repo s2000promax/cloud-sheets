@@ -1,4 +1,4 @@
-import {$} from '@core/dom';
+import { $ } from '@core/dom';
 
 export class Sheet {
   constructor(selector, options) {
@@ -28,6 +28,6 @@ export class Sheet {
   render() {
     this.$element.append(this.getRoot());
 
-    this.components.forEach( component => component.init())
+    this.components.forEach(component => component.init())
   }
 }

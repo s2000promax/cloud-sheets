@@ -1,27 +1,31 @@
 const CODES = {
-  A: 65,
-  Z: 90
+  A: 65, Z: 90
 }
 
-const toCell = () => {
-  return (
-    `<div class="cell" contenteditable></div>`
-  );
+const toCell = (_, col) => {
+  return (`<div class="cell" data-col="${col}" contenteditable></div>`);
 }
 
-const toColumn = (col) => {
-  return (
-    `<div class="column">${col}</div>`
-  );
+const toColumn = (col, index) => {
+  return (`<div class="column" data-type="resizable" data-col="${index}">
+        ${col}
+        <div class="col-resize" data-resize="col"></div>
+     </div>`);
 }
 
 const createRow = (index, content) => {
-  return (
-    `<div class="row">
-        <div class="row-info">${index ? index : ''}</div>
+  const resize = index ? `<div 
+                            class="row-resize" 
+                            data-resize="row"
+                          >
+                          </div>` : '';
+  return (`<div class="row">
+        <div class="row-info">
+            ${index ? index : ''}
+            ${resize}
+        </div>
         <div class="row-data">${content}</div>
-     </div>`
-  );
+     </div>`);
 }
 
 const toChar = (_, index) => String.fromCharCode(CODES.A + index);

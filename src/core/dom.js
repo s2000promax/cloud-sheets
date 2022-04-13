@@ -38,6 +38,18 @@ class Dom {
     }
     return this;
   }
+
+  get data() {
+    return this.$element.dataset
+  }
+
+  closest(selector) {
+    return $(this.$element.closest(selector));
+  }
+
+  getCoords() {
+    return this.$element.getBoundingClientRect();
+  }
 }
 
 export function $(selector) {

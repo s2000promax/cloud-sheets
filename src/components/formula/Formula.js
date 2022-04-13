@@ -1,4 +1,4 @@
-import {SheetComponent} from '@core/SheetComponent';
+import { SheetComponent } from '@core/SheetComponent';
 
 export class Formula extends SheetComponent {
   static className = 'sheet__formula';
