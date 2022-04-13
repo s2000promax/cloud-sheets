@@ -22,15 +22,27 @@ export class Table extends SheetComponent {
       // const $parent = $resizer.$element.closest('.column'); // bad!!!
       const $parent = $resizer.closest('[data-type="resizable"]');
       const coords = $parent.getCoords();
-      console.log();
+      const type = $resizer.data.resize;
+      console.log(type)
+
+      const cells = this.$root.findAll(`[data-col="${$parent.data.col}"]`);
 
       document.onmousemove = (e) => {
-        const deltaX = e.pageX - coords.right;
-        const value = coords.width + deltaX;
-        $parent.$element.style.width = value + 'px';
+        if (type === 'col') {
+          const deltaX = e.pageX - coords.right;
+          const value = coords.width + deltaX;
+          $parent.css({
+            width: value + 'px'
+          });
 
-        document.querySelectorAll(`[data-col="${$parent.data.col}"]`)
-            .forEach(el => el.style.width = value + 'px');
+          cells.forEach(el => el.style.width = value + 'px');
+        } else if (type === 'row') {
+          const deltaY = e.pageY - coords.bottom;
+          const value = coords.height + deltaY;
+          $parent.css({
+            height: value + 'px'
+          });
+        }
       }
 
       document.onmouseup = () => {
