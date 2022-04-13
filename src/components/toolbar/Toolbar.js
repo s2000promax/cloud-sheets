@@ -1,7 +1,8 @@
-import {SheetComponent} from '@core/SheetComponent';
+import { SheetComponent } from '@core/SheetComponent';
 
 export class Toolbar extends SheetComponent {
   static className = 'sheet__toolbar';
+
   constructor($root) {
     super($root, {
       name: 'Toolbar',
