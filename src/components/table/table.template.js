@@ -2,8 +2,33 @@ const CODES = {
   A: 65, Z: 90
 }
 
-const toCell = (_, col) => {
-  return (`<div class="cell" data-col="${col}" contenteditable></div>`);
+/*
+const toCell = (row, col) => {
+  return `
+            <div
+                class="cell"
+                data-col="${col}"
+                data-row="${row}"
+                contenteditable
+            >
+            </div>
+         `;
+}
+*/
+
+function toCell(row) {
+  return function(_, col) {
+    return `
+            <div
+                class="cell"
+                data-col="${col}"
+                data-id="${row}:${col}"
+                data-type="cell"
+                contenteditable
+            >
+            </div>
+         `;
+  }
 }
 
 const toColumn = (col, index) => {
@@ -42,12 +67,13 @@ export const createTable = (rowsCount = 15) => {
 
   rows.push(createRow(null, cols));
 
-  for (let index = 0; index < rowsCount; index += 1) {
+  for (let row = 0; row < rowsCount; row += 1) {
     const cell = new Array(colsCount)
         .fill('')
-        .map(toCell)
+        // .map((_, col) => toCell(row))
+        .map(toCell(row))
         .join('');
-    rows.push(createRow(index + 1, cell))
+    rows.push(createRow(row + 1, cell))
   }
 
 
